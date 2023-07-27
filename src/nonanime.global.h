@@ -51,9 +51,10 @@ extern FILE * yynonanimeout;
   fprintf(yynonanimeout == NULL ? stderr_FILE : yynonanimeout, "NONANIME_DESCRIPTION: " __FILE__ ": " BIGLIB_STRING(__LINE__) ": " BIGLIB_STRING(__func__) ": "  __VA_ARGS__); 
 //putc('\n', yynonanimeout); 
 //#define nonanime_err(format_mess,...)  fprintf(yynonanimeout, "ERREUR: " "NONANIME_DESCRIPTION: " __FILE__ ": " BIGLIB_STRING(__LINE__) ": " __FUNC__ ": " format_mess "\n", __VA_ARGS__);
-#define nonanime_err(...)						\
-  if (!yynonanimeout) fprintf(yynonanimeout, "ERREUR: " "NONANIME_DESCRIPTION: " __FILE__ ": " BIGLIB_STRING(__LINE__) ": " BIGLIB_STRING(__func__) ": " __VA_ARGS__); \
-  fprintf(                    stderr_FILE  ,            "NONANIME_DESCRIPTION: " __FILE__ ": " BIGLIB_STRING(__LINE__) ": " BIGLIB_STRING(__func__) ": " __VA_ARGS__); 
+#define nonanime_err(...)	{					\
+    if (NULL != yynonanimeout) { fprintf(yynonanimeout, "ERREUR: " "NONANIME_DESCRIPTION: " __FILE__ ": " BIGLIB_STRING(__LINE__) ": " BIGLIB_STRING(__func__) ": " __VA_ARGS__); }; \
+    fprintf(                    stderr_FILE  ,            "NONANIME_DESCRIPTION: " __FILE__ ": " BIGLIB_STRING(__LINE__) ": " BIGLIB_STRING(__func__) ": " __VA_ARGS__); \
+  };
   //putc('\n', yynonanimeout); 
 
 #define message nonanime_mess
